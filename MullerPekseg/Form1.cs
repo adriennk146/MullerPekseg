@@ -81,5 +81,51 @@ namespace MullerPekseg
             peskegNevTB.Text = "";
 
         }
+
+        private void pluszBtn_Click(object sender, EventArgs e)
+        {
+            if(pekaruLstBx.SelectedIndex>-1 && peksegekLstBx.SelectedIndex >-1)
+            {
+                peksegLista[peksegekLstBx.SelectedIndex].Termekek.Add(pekaruLista[pekaruLstBx.SelectedIndex]);
+                TermekekKiir();
+            }
+            else
+            {
+                MessageBox.Show("Jelöljön ki egy terméket és egy pékséget!");
+            }
+        }
+
+        private void peksegekLstBx_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            /* pekaruPeksegLstVw.Items.Clear();
+             for(int i = 0; i < peksegLista[peksegekLstBx.SelectedIndex].Termekek.Count; i++)
+             {
+                 pekaruPeksegLstVw.Items.Add(peksegLista[peksegekLstBx.SelectedIndex].Termekek[i].toString());
+             }*/
+            TermekekKiir();
+        }
+
+        private void TermekekKiir()
+        {
+            peksegPekaruLstBx.Items.Clear();
+            for (int i = 0; i < peksegLista[peksegekLstBx.SelectedIndex].Termekek.Count; i++)
+            {
+                peksegPekaruLstBx.Items.Add(peksegLista[peksegekLstBx.SelectedIndex].Termekek[i].toString());
+            }
+        }
+
+        private void tabok_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            for(int i = 0; i < peksegLista.Count; i++)
+            {
+                peksegekStatLstBx.Items.Add(peksegLista[i].Nev);
+            }
+            
+        }
+
+        private void peksegekStatLstBx_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            statLbl.Text = this.peksegLista[peksegekStatLstBx.SelectedIndex].Statisztika();
+        }
     }
 }
